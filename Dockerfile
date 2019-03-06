@@ -3,7 +3,9 @@
 FROM phusion/baseimage:latest@sha256:29479c37fcb28089eddd6619deed43bcdbcccf2185369e0199cc51a5ec78991b
 LABEL maintainer Natan Sągol <m@merlinnot.com>
 
-RUN sudo apt update -y
+RUN rm /var/lib/apt/lists/* 
+RUN rm /var/cache/apt/*.bin
+RUN apt update -y
 # Use bash
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
