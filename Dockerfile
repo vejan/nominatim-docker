@@ -30,8 +30,8 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt xenial-pgdg main" >> \
 RUN apt-get -qq update
 
 # Set build variables
-ARG PGSQL_VERSION=9.6
-ARG POSTGIS_VERSION=2.4
+ARG PGSQL_VERSION=11
+ARG POSTGIS_VERSION=2.5
 
 # Install build dependencies
 USER root
