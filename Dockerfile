@@ -29,13 +29,11 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt xenial-pgdg main" >> \
       apt-key add -
 RUN apt-get -qq update
 
-# Set build variables
+# Set build variables ###conf section hard coded
 ARG PGSQL_VERSION=11
 ARG POSTGIS_VERSION=2.5
 
-# Configure postgres
-RUN echo "host all  all    0.0.0.0/0  trust" >> /etc/postgresql/11/main/pg_hba.conf && \
-    echo "listen_addresses='*'" >> /etc/postgresql/11/main/postgresql.conf
+
 
 # Install build dependencies
 USER root
@@ -78,6 +76,10 @@ RUN apt-get install -y --no-install-recommends \
 RUN pip install --upgrade pip
 RUN pip install osmium
 
+# Configure postgres
+RUN echo "host all  all    0.0.0.0/0  trust" >> /etc/postgresql/11/main/pg_hba.conf && \
+    echo "listen_addresses='*'" >> /etc/postgresql/11/main/postgresql.conf
+    
 # Create nominatim user account
 USER root
 RUN useradd -d /srv/nominatim -s /bin/bash -m nominatim
